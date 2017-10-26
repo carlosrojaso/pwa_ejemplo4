@@ -4,21 +4,6 @@
 	(factory());
 }(this, function () { 'use strict';
 
-	function SWRegister () {
-		/*
-	  if ('serviceWorker' in navigator) {
-
-	    navigator.serviceWorker.register('/sw.js').then(function () {
-	      console.log('Service worker successfully registered');
-	    }).catch(function (err) {
-	      console.error('Service worker failed to register', err);
-	    });
-	  } else {
-	    console.log('Service workers not supported');
-	  }
-	  */
-	}
-
 	/**
 	 * Show the colour input element if <input type="color"> is supported.
 	 * There does not appear to be a good polyfill for it right now.
@@ -8274,7 +8259,6 @@
 	var Pages = [HomePage, AnnotatePage, AboutPage, SharePage, SnapshotPage];
 
 	function initApp() {
-	  SWRegister();
 	  InputColourShim();
 	  WebRTCShim();
 	  init();
