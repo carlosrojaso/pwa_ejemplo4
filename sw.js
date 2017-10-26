@@ -20,7 +20,7 @@ importScripts('workbox-sw.prod.v2.1.0.js');
 const fileManifest = [
   {
     "url": "build/bundle.js",
-    "revision": "8d4c826269b343d1f1a07b24364646c0"
+    "revision": "49d5fd6b84023cda2e63f22926f8577c"
   },
   {
     "url": "css/styles.css",
@@ -1808,15 +1808,11 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "6dc5d267ff9af001477f597d3d0e5c00"
+    "revision": "4848f7dbd286dffa84e25df577318408"
   },
   {
     "url": "manifest.json",
-    "revision": "b172789f9d57993c5a036b34b33e6024"
-  },
-  {
-    "url": "redirect.html",
-    "revision": "5bdae1f536d202410e5e613ffa03e854"
+    "revision": "b052fb7d6123755466ff99d6fc567590"
   },
   {
     "url": "sounds/camera.wav",
@@ -1834,3 +1830,21 @@ const fileManifest = [
 
 const workboxSW = new self.WorkboxSW();
 workboxSW.precache(fileManifest);
+
+const cacheFirstStrategy = workboxSW.strategies.cacheFirst();
+console.log("Workbox Cache First");
+workboxSW.router.registerRoute('/css/*', cacheFirstStrategy);
+
+const cacheOnlyStrategy2 = workboxSW.strategies.cacheOnly();
+workboxSW.router.registerRoute('/images/*', cacheOnlyStrategy2);
+
+const networkFirstStrategy = workboxSW.strategies.networkFirst();
+workboxSW.router.registerRoute('/vendor/*', networkFirstStrategy);
+
+const networkOnlyStrategy = workboxSW.strategies.networkOnly();
+workboxSW.router.registerRoute('/build/*', networkOnlyStrategy);
+
+console.log("Todas las estrategias con Workbox");
+const staleWhileRevalidateStrategy =
+workboxSW.strategies.staleWhileRevalidate();
+workboxSW.router.registerRoute('/sounds/*', staleWhileRevalidateStrategy);
